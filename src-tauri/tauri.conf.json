@@ -32,7 +32,12 @@
       }
     },
     "allowlist": {
-      "all": true
+      "all": true,
+      "http": {
+        "all": true,
+        "request": true,
+        "scope": ["https://firestore.googleapis.com/v1/*"]
+      }
     },
     "windows": [
       {
