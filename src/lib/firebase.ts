@@ -1,15 +1,7 @@
-import firebase from 'firebase/compat/app'
+import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
-// import environment variables from dotenv
-// require('dotenv').config();
-// import * as dotenv from 'dotenv';
-// dotenv.config()
-console.log(import.meta.env)
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 const firebaseConfig = {
   apiKey: import.meta.env.FIREBASE_apiKey,
   authDomain: import.meta.env.FIREBASE_authDomain,
@@ -18,7 +10,6 @@ const firebaseConfig = {
   messagingSenderId: import.meta.env.FIREBASE_messagingSenderId,
   appId: import.meta.env.FIREBASE_appId,
 };
-
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
