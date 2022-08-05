@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
 import './App.css'
-import { Product, Document, ParsedProduct } from './types';
+import { useEffect, useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import { Document, ParsedProduct } from './types';
 import { getDocs } from './lib/calls'
+import LoginPage from './pages/Login';
 
 function App() {
   const [products, setProducts] = useState<undefined | Document<ParsedProduct>[]>();
@@ -13,7 +15,9 @@ function App() {
   console.log(products);
   return (
     <div className="App">
-      {products && products.map(product => <p>{product.fields.price}</p>)}
+      {/* <LoginPage /> */}
+      <Outlet />
+      {/* {products && products.map(product => <p>{product.fields.price}</p>)} */}
     </div>
   )
 }
