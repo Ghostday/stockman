@@ -16,3 +16,15 @@ export async function getDocs(collection: string) {
   return docs
 }
 
+// TODO: Create a call to ensure the PIN entered is valid
+export async function loginUser(pin: string) {
+  const user = {
+    name: "Chris",
+    lastLoggedIn: new Date(Date.now())
+  }
+  if (pin === "0888") {
+    return user;
+  }
+  // Returns a name if logged in, ELSE returns false
+
+}
