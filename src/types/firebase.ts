@@ -14,3 +14,9 @@ export interface Document<T = any> {
   updateTime: Date;
   fields: T;
 }
+
+export interface Auth {
+  name: string;
+  lastLoggedIn: Date;
+  pin: string;
+}
