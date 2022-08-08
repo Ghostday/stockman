@@ -1,4 +1,4 @@
-import { Product, DocResponse } from '../types'
+import { Product, DocResponse, Auth } from '../types'
 import { unpackDocument } from '../lib/utils'
 import { http } from '@tauri-apps/api'
 
@@ -18,12 +18,15 @@ export async function getDocs(collection: string) {
 
 // TODO: Create a call to ensure the PIN entered is valid
 export async function loginUser(pin: string) {
-  const user = {
-    name: "Chris",
-    lastLoggedIn: new Date(Date.now())
-  }
-  if (pin === "0888") {
-    return user;
+  const url = `${apiURL}projects/${projectId}/databases/(default)/documents/users/`
+  const response: DocResponse<Auth | any> = await client.get(url);
+  console.log(response.data.documents)
+  let user = response.data.documents.find(doc => {
+    return doc.fields.pin.stringValue === pin
+  })
+  if (user) {
+    user = unpackDocument(user)
+    return user.fields
   }
   // Returns a name if logged in, ELSE returns false
 
