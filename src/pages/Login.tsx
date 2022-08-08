@@ -1,10 +1,7 @@
 import { useState } from 'react'
-import { loginUser } from '../lib/calls'
-import { useNavigate } from 'react-router-dom'
 import '../styles/Login.css'
 
-export default function LoginPage() {
-  const navigate = useNavigate();
+export default function LoginPage({login}: {login: (pin: string) => void}) {
   const [pin, setPin] = useState('');
 
   const handlePinChange = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -15,13 +12,9 @@ export default function LoginPage() {
     setPin('')
   }
 
-  const handlePinSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handlePinSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     handleClear(e);
-    const auth = await loginUser(pin)
-    if (auth) {
-      console.log("Authentication successful")
-      navigate("/store")
-    }
+    login(pin);
   }
 
   return (

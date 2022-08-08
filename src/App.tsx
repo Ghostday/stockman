@@ -1,23 +1,24 @@
 import './App.css'
-import { useEffect, useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import { Document, ParsedProduct } from './types';
-import { getDocs } from './lib/calls'
+import { useState } from 'react'
+import { Auth } from './types';
+import { loginUser } from './lib/calls'
 import LoginPage from './pages/Login';
+import StockPage from './pages/StockPage';
 
 function App() {
-  const [products, setProducts] = useState<undefined | Document<ParsedProduct>[]>();
+  const [auth, setAuth] = useState<undefined | Auth>();
 
-  useEffect(() => {
-    getDocs("products").then(data => setProducts(data));
-  },[]);
+  async function handleLogin(pin: string) {
+    const auth = await loginUser(pin)
+    if (auth) {
+      console.log("Authentication successful");
+      setAuth(auth);
+    }
+  }
 
-  console.log(products);
   return (
     <div className="App">
-      {/* <LoginPage /> */}
-      <Outlet />
-      {/* {products && products.map(product => <p>{product.fields.price}</p>)} */}
+      {auth ? <StockPage user={auth}/> : <LoginPage login={handleLogin} />}
     </div>
   )
 }
