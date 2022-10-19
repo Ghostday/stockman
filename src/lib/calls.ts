@@ -2,8 +2,8 @@ import { Product, DocResponse, Auth } from '../types'
 import { unpackDocument } from '../lib/utils'
 import { http } from '@tauri-apps/api'
 
-const apiURL = 'https://firestore.googleapis.com/v1'
-const projectId = import.meta.env.FIREBASE_projectId
+const apiURL = 'https://firestore.googleapis.com/v1';
+const projectId = import.meta.env.FIREBASE_projectId;
 
 const client = await http.getClient()
 
@@ -22,7 +22,7 @@ export async function loginUser(pin: string) {
   const response: DocResponse<Auth | any> = await client.get(url);
 
   let user = response.data.documents.find(doc => {
-    return doc.fields.pin.stringValue === pin;
+    return doc.fields.PIN.stringValue === pin;
   })
 
   if (user) {
